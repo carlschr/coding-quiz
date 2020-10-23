@@ -118,13 +118,13 @@ li {
 }
 
 .red {
-    background-color: rgb(175, 84, 84);
+    background-color: #AF5454;
 }
 
 .green {
-    background-color: rgb(52, 155, 107);
+    background-color: #349B6B;
 }
 
-.answer:disabled {
+.highscores:disabled, .answer:disabled {
     color: #333;
 }
