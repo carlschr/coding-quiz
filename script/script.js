@@ -17,50 +17,50 @@ const questionOne = new Question('One', [{text: 'one', correct: 'false'},
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'true'}]);
 
-const questionTwo = new Question('One', [{text: 'one', correct: 'false'}, 
+const questionTwo = new Question('Two', [{text: 'one', correct: 'false'}, 
+{text: 'two', correct: 'false'}, 
+{text: 'three', correct: 'true'}, 
+{text: 'correct', correct: 'false'}]);
+
+const questionThree = new Question('Three', [{text: 'one', correct: 'false'}, 
+{text: 'two', correct: 'true'}, 
+{text: 'three', correct: 'false'}, 
+{text: 'correct', correct: 'false'}]);
+
+const questionFour = new Question('Four', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'true'}]);
 
-const questionThree = new Question('One', [{text: 'one', correct: 'false'}, 
+const questionFive = new Question('Five', [{text: 'one', correct: 'true'}, 
+{text: 'two', correct: 'false'}, 
+{text: 'three', correct: 'false'}, 
+{text: 'correct', correct: 'false'}]);
+
+const questionSix = new Question('Six', [{text: 'one', correct: 'false'}, 
+{text: 'two', correct: 'true'}, 
+{text: 'three', correct: 'false'}, 
+{text: 'correct', correct: 'false'}]);
+
+const questionSeven = new Question('Seven', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'true'}]);
 
-const questionFour = new Question('One', [{text: 'one', correct: 'false'}, 
+const questionEight = new Question('Eight', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'true'}]);
 
-const questionFive = new Question('One', [{text: 'one', correct: 'false'}, 
+const questionNine = new Question('Nine', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'true'}]);
+{text: 'three', correct: 'true'}, 
+{text: 'correct', correct: 'false'}]);
 
-const questionSix = new Question('One', [{text: 'one', correct: 'false'}, 
+const questionTen = new Question('Ten', [{text: 'one', correct: 'true'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'true'}]);
-
-const questionSeven = new Question('One', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'true'}]);
-
-const questionEight = new Question('One', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'true'}]);
-
-const questionNine = new Question('One', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'true'}]);
-
-const questionTen = new Question('One', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'true'}]);
+{text: 'correct', correct: 'false'}]);
 
 const renderQuestions = questionObject => {
     //Update question number
