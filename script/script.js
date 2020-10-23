@@ -2,6 +2,7 @@
 const timer = document.querySelector('#time');
 const highScores = document.querySelector('.highscores');
 const quizList = document.querySelector('.quiz-list');
+const quizItems = document.querySelector('.answer');
 const questionNumber = document.querySelector('.question');
 const resultDiv = document.querySelector('.result');
 
@@ -95,6 +96,22 @@ const renderStartButton = () => {
     resultDiv.textContent = 'Press the button above to start.';
 };
 
+//Function for disabling and coloring buttons
+const disableButtons = buttons => {
+    buttons.forEach(button => {
+        button.setAttribute('disabled', '');
+        button.setAttribute('class', 'answer red');
+    });
+};
+
+const renderNextButton = () => {
+    //Create and append next button
+    let nextButton = document.createElement('button');
+    nextButton.setAttribute('class', 'answer next');
+    nextButton.textContent = '>>>>>>>>>>> Next Question >>>>>>>>>>>';
+    quizList.append(nextButton);
+}
+
 //Function for rendering of questions
 const renderQuestions = questionObject => {
     //Clear previous render
@@ -115,6 +132,24 @@ const renderQuestions = questionObject => {
         newAnswer.setAttribute('data-correct', answer.correct);
         newAnswer.setAttribute('class', 'answer');
         newListItem.appendChild(newAnswer);
+
+        newAnswer.addEventListener('click', (event) => {
+            if (event.currentTarget.getAttribute('data-correct') === 'true') {
+                //Change wrong answers to red and correct answer to green
+                disableButtons(document.querySelectorAll('.answer'));
+                event.currentTarget.setAttribute('class', 'answer green');
+        
+                resultDiv.textContent = 'Correct!';
+
+                //Renders the next button
+                renderNextButton();
+            } else {
+                event.currentTarget.setAttribute('class', 'answer red');
+                event.currentTarget.setAttribute('disabled', '');
+                count -= 5;
+                timer.textContent = count;
+            };
+        });
     });
 
     //Set result text to a neutral state
@@ -124,6 +159,7 @@ const renderQuestions = questionObject => {
 //Initial render
 renderStartButton();
 
+//Variable for start button
 const start = document.querySelector('#start-button');
 
 //Renders first question and starts timer upon hitting start
