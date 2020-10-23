@@ -94,7 +94,7 @@ const renderStartButton = () => {
     //Create and append start button
     let startButton = document.createElement('button');
     startButton.textContent = 'Press me to start the coding quiz.';
-    startButton.setAttribute('class', 'answer');
+    startButton.setAttribute('class', 'answer next');
     startButton.setAttribute('id', 'start-button');
     startListItem.append(startButton);
     
@@ -104,7 +104,11 @@ const renderStartButton = () => {
     //Renders first question and starts timer upon hitting start
     //If the timer reaches zero, the quiz ends and the score is rendered
     startButton.addEventListener('click', () => {
+        //Disable highscores button
+        highScores.setAttribute('disabled', '');
+
         renderQuestions(questionOne);
+        
         let timeStart = setInterval(() => {
             count--;
             timer.textContent = count;
@@ -204,6 +208,9 @@ const renderQuestions = questionObject => {
 };
 
 const renderScore = () => {
+    //Enable highscores button
+    highScores.removeAttribute('disabled');
+
     //Set timer to zero
     count = 0;
     timer.textContent = count;
