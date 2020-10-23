@@ -7,7 +7,9 @@ const questionNumber = document.querySelector('.question');
 const resultDiv = document.querySelector('.result');
 
 //Timer count
-let count = 120;
+let count = 60;
+
+
 
 //Question class with constructor function that takes a number and an array of answer objects
 class Question {
@@ -69,6 +71,9 @@ const questionTen = new Question('Ten', [{text: 'one', correct: 'true'},
 {text: 'correct', correct: 'false'}]);
 //End of questions
 
+const questions = [questionOne, questionTwo, questionThree, questionFour, questionFive, questionSix, questionSeven, questionEight, questionNine, questionTen];
+let questionCount = 0;
+
 const renderStartButton = () => {
     //Set timer to start time
     timer.textContent = count;
@@ -78,7 +83,7 @@ const renderStartButton = () => {
 
     //Create and append quiz info
     let infoDiv = document.createElement('li');
-    infoDiv.innerHTML = '<p class="info">Welcome to the coding quiz. The format of the quiz is multiple-choice and you will have two minutes to complete the quiz. For every wrong answer we will subtract five seconds from the timer at the top-right corner of the screen. After you have selected the correct answer, the "next" button will appear below the answers. Feel free to log your score at the end of the quiz. Good luck!</p>';
+    infoDiv.innerHTML = '<p class="info">Welcome to the coding quiz. The format of the quiz is multiple-choice and you will have one minute to complete the quiz. For every wrong answer we will subtract five seconds from the timer at the top-right corner of the screen. After you have selected the correct answer, the "next" button will appear below the answers. Feel free to log your score at the end of the quiz. Good luck!</p>';
     quizList.append(infoDiv);
 
     //Create and append lit item for start button
@@ -110,12 +115,20 @@ const renderNextButton = () => {
     nextButton.setAttribute('class', 'answer next');
     nextButton.textContent = '>>>>>>>>>>> Next Question >>>>>>>>>>>';
     quizList.append(nextButton);
-}
+
+    //Add listener to move to next question
+    nextButton.addEventListener('click', () => {
+        renderQuestions(questions[questionCount]);
+    });
+};
 
 //Function for rendering of questions
 const renderQuestions = questionObject => {
     //Clear previous render
     quizList.innerHTML = '';
+
+    //Increment question tracker
+    questionCount++;
 
     //Update question number
     questionNumber.textContent = `Question ${questionObject.number}:`;
@@ -144,10 +157,14 @@ const renderQuestions = questionObject => {
                 //Renders the next button
                 renderNextButton();
             } else {
+                //Change wrong answer to red
                 event.currentTarget.setAttribute('class', 'answer red');
                 event.currentTarget.setAttribute('disabled', '');
+                //Subtract five seconds from timer
                 count -= 5;
                 timer.textContent = count;
+
+                resultDiv.textContent = 'Nope.';
             };
         });
     });
