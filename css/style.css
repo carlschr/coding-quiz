@@ -1,0 +1,74 @@
+/* general rulesets */
+
+body {
+    color: #333;
+    background-color: #EEE;
+}
+
+button {
+    padding: .8rem;
+    font-size: 1rem;
+    background-color: #BBB;
+}
+
+/* header rulesets */
+
+header {
+    background-color: #a170a5;
+    /* flexbox with one row */
+    /* contains classes: timer and highscores */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
+}
+
+.head-item {
+    display: inline-block;
+}
+
+.highscores {
+    text-decoration: none;
+    margin-left: 1.2rem;
+}
+
+.timer {
+    font-size: 1rem;
+    margin-right: 1.2rem;
+}
+
+/* main rulesets */
+
+main {
+    /* flexbox containing one row */
+    /* contains one class: quiz-list */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.quiz-list {
+    /* nested flexbox containing one column */
+    /* contains list items */
+    display: flex;
+    width: 50%;
+    margin: 5rem auto;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: #a170a5;
+}
+
+li {
+    /* nested flexboxes containing one row each */
+    /* conatins one class: answer */
+    display: flex;
+    flex-direction: row;
+}
+
+.answer {
+    /* nested flex-items */
+    flex-grow: 1;
+    text-align: left;
+    margin: .8rem;
+}
