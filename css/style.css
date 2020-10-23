@@ -99,6 +99,13 @@ li {
     margin: 0 2rem 1.5rem 2rem;
 }
 
+.next {
+    /* flex item within list item */
+    background-color: #333;
+    color: #FFF;
+    text-align: center;
+}
+
 .result {
     /* final flex item within main */
     box-sizing: border-box;
@@ -108,4 +115,16 @@ li {
     text-align: center;
     padding: 1rem;
     border-bottom: 2px solid #333;
+}
+
+.red {
+    background-color: rgb(175, 84, 84);
+}
+
+.green {
+    background-color: rgb(52, 155, 107);
+}
+
+.answer:disabled {
+    color: #333;
 }
