@@ -9,8 +9,6 @@ const resultDiv = document.querySelector('.result');
 //Timer count
 let count = 60;
 
-
-
 //Question class with constructor function that takes a number and an array of answer objects
 class Question {
     constructor(number, answers) {
@@ -71,9 +69,12 @@ const questionTen = new Question('Ten', [{text: 'one', correct: 'true'},
 {text: 'correct', correct: 'false'}]);
 //End of questions
 
+//As the questions are rendered the questionCount will increment
+//When the next button is clicked it will render the currently indexed question
 const questions = [questionOne, questionTwo, questionThree, questionFour, questionFive, questionSix, questionSeven, questionEight, questionNine, questionTen];
 let questionCount = 0;
 
+//Function to render start button and quiz info
 const renderStartButton = () => {
     //Set timer to start time
     timer.textContent = count;
@@ -99,6 +100,20 @@ const renderStartButton = () => {
     
     //Initial result text used to direct attention to the start button
     resultDiv.textContent = 'Press the button above to start.';
+
+    //Renders first question and starts timer upon hitting start
+    //If the timer reaches zero, the quiz ends and the score is rendered
+    startButton.addEventListener('click', () => {
+        renderQuestions(questionOne);
+        let timeStart = setInterval(() => {
+            count--;
+            timer.textContent = count;
+            if (count <= 0 || questionCount === 10) {
+                clearInterval(timeStart);
+                renderScore();
+            };
+        }, 1000);
+    });
 };
 
 //Function for disabling and coloring buttons
@@ -109,20 +124,35 @@ const disableButtons = buttons => {
     });
 };
 
+//Function to render next button beneath the answers
 const renderNextButton = () => {
-    //Create and append next button
+    //Create next button
     let nextButton = document.createElement('button');
     nextButton.setAttribute('class', 'answer next');
-    nextButton.textContent = '>>>>>>>>>>> Next Question >>>>>>>>>>>';
-    quizList.append(nextButton);
+    
+    //Conditional for nextButton functionality
+    //If the user has finished the quiz the button render the score screen
+    if (questionCount === 9) {
+        nextButton.textContent = 'Submit for Score.'
 
-    //Add listener to move to next question
-    nextButton.addEventListener('click', () => {
-        renderQuestions(questions[questionCount]);
-    });
+        //Add listener to move to score screen
+        nextButton.addEventListener('click', () => {
+            renderScore();
+        });
+    } else {
+        nextButton.textContent = '>>>>>>>>>>> Next Question >>>>>>>>>>>';
+
+        //Add listener to move to next question
+        nextButton.addEventListener('click', () => {
+            renderQuestions(questions[questionCount]);
+        });
+    };
+
+    //Append next button
+    quizList.append(nextButton);
 };
 
-//Function for rendering of questions
+//Function for rendering questions
 const renderQuestions = questionObject => {
     //Clear previous render
     quizList.innerHTML = '';
@@ -173,22 +203,16 @@ const renderQuestions = questionObject => {
     resultDiv.textContent = 'Awaiting answer...';
 };
 
+const renderScore = () => {
+    //Set timer to zero
+    count = 0;
+    timer.textContent = count;
+
+    //Set score screen text
+    questionNumber.textContent = 'Time\'s up! Submit your score below.'
+    quizList.innerHTML = '';
+    resultDiv.textContent = 'Enter your name above and submit your score.';
+};
+
 //Initial render
 renderStartButton();
-
-//Variable for start button
-const start = document.querySelector('#start-button');
-
-//Renders first question and starts timer upon hitting start
-//If the timer reaches zero, the quiz ends and the score is rendered
-start.addEventListener('click', () => {
-    renderQuestions(questionOne);
-    let timeStart = setInterval(() => {
-        count--;
-        timer.textContent = count;
-        if (count === 0) {
-            timeStart.clearInterval();
-            //renderScore();
-        };
-    }, 1000);
-});
