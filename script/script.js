@@ -76,6 +76,9 @@ let questionCount = 0;
 
 //Function to render start button and quiz info
 const renderStartButton = () => {
+    //Enable highscores button
+    highScores.removeAttribute('disabled');
+
     //Set timer to start time
     timer.textContent = count;
 
@@ -108,7 +111,7 @@ const renderStartButton = () => {
         highScores.setAttribute('disabled', '');
 
         renderQuestions(questionOne);
-        
+
         let timeStart = setInterval(() => {
             count--;
             timer.textContent = count;
@@ -207,10 +210,8 @@ const renderQuestions = questionObject => {
     resultDiv.textContent = 'Awaiting answer...';
 };
 
+//Function for rendering the score form
 const renderScore = () => {
-    //Enable highscores button
-    highScores.removeAttribute('disabled');
-
     //Set timer to zero
     count = 0;
     timer.textContent = count;
@@ -219,6 +220,8 @@ const renderScore = () => {
     questionNumber.textContent = 'Time\'s up! Submit your score below.'
     quizList.innerHTML = '';
     resultDiv.textContent = 'Enter your name above and submit your score.';
+
+    quizList.innerHTML = "<form><label for='name'>Name:</label><input id='name' type='text' name='name'/><input id='submit' type='submit' name='submit' value='Submit'/></form>"
 };
 
 //Initial render
