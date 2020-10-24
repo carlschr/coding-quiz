@@ -79,6 +79,15 @@ const renderStartButton = () => {
     //Enable highscores button
     highScores.removeAttribute('disabled');
 
+    //Clear quiz list html
+    quizList.innerHTML = '';
+
+    //Reset timer
+    count = 60;
+
+    //Reset questionCount
+    questionCount = 0;
+
     //Set timer to start time
     timer.textContent = count;
 
@@ -115,9 +124,11 @@ const renderStartButton = () => {
         let timeStart = setInterval(() => {
             count--;
             timer.textContent = count;
-            if (count <= 0 || questionCount === 10) {
+            if (count <= 0) {
                 clearInterval(timeStart);
                 renderScore();
+            } else if (questionCount === 10) {
+                clearInterval(timeStart);
             };
         }, 1000);
     });
@@ -136,10 +147,13 @@ const renderNextButton = () => {
     //Create next button
     let nextButton = document.createElement('button');
     nextButton.setAttribute('class', 'answer next');
+
+    //Increment question tracker
+    questionCount++;
     
     //Conditional for nextButton functionality
     //If the user has finished the quiz the button render the score screen
-    if (questionCount === 9) {
+    if (questionCount === 10) {
         nextButton.textContent = 'Submit for Score.'
 
         //Add listener to move to score screen
@@ -163,9 +177,6 @@ const renderNextButton = () => {
 const renderQuestions = questionObject => {
     //Clear previous render
     quizList.innerHTML = '';
-
-    //Increment question tracker
-    questionCount++;
 
     //Update question number
     questionNumber.textContent = `Question ${questionObject.number}:`;
@@ -222,7 +233,75 @@ const renderScore = () => {
     resultDiv.textContent = 'Enter your name above and submit your score.';
 
     quizList.innerHTML = "<form><label for='name'>Name:</label><input id='name' type='text' name='name'/><input id='submit' type='submit' name='submit' value='Submit'/></form>"
+
+    document.querySelector('#submit').addEventListener('click', (event) => {
+        event.preventDefault();
+        let storageNum = localStorage.length;
+        localStorage.setItem(`score${storageNum}`, JSON.stringify([document.querySelector('#name').value, questionCount]));
+        renderStartButton();
+    });
 };
+
+//Function for returning top five or less high scores
+const getTopFiveScores = () => {
+    //Container arrays for the data as it's parsed and organized
+    let allScores = [];
+    let orderedScores = [];
+    let topFiveScores = [];
+
+    //Pushes all relevant localStorage data to an array
+    for (let data in localStorage) {
+        if (data.includes('score')) {
+            allScores.push(JSON.parse(localStorage.getItem(data)));
+        };
+    };
+
+    //Recursive function to move the data from allScores to orderedScores 
+    // in order of highest score to lowest score
+    const moveHighest = () => {
+        for (let i = 0; i < allScores.length; i++) {
+            let passed = true;
+            for (let j = 0; j < allScores.length; j++) {
+                if (allScores[i][1] < allScores[j][1]) {
+                    passed = false;
+                };
+            };
+            if (passed) {
+                orderedScores.push(allScores[i]);
+                allScores.splice(i, 1);
+                moveHighest();
+            };
+        };
+    };
+    //Function call for number sort
+    moveHighest();
+
+    //Pushes top five or less scores from orderedScores to topFiveScores
+    if (orderedScores.length > 5) {
+        for (let i = 0; i < 5; i++) {
+            topFiveScores.push(orderedScores[i]);
+        };
+    } else {
+        for (let i = 0; i < orderedScores.length; i++) {
+            topFiveScores.push(orderedScores[i]);
+        };
+    };
+
+    return topFiveScores;
+}; 
 
 //Initial render
 renderStartButton();
+
+//Highscores click event
+highScores.addEventListener('click', () => {
+    if (highScores.getAttribute('data-function') === 'score-list') {
+        highScores.textContent = 'Return';
+        highScores.setAttribute('data-funtion', 'return');
+        renderHighScores();
+    } else {
+        highScores.textContent = 'View highscores';
+        highScores.setAttribute('data-function', 'score-list');
+        renderStartButton();
+    };
+})
