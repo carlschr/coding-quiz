@@ -4,6 +4,7 @@ const highScores = document.querySelector('.highscores');
 const quizList = document.querySelector('.quiz-list');
 const quizItems = document.querySelector('.answer');
 const questionNumber = document.querySelector('.question');
+const questionContent = document.querySelector('.question-content');
 const resultDiv = document.querySelector('.result');
 
 //Timer count
@@ -11,59 +12,60 @@ let count = 60;
 
 //Question class with constructor function that takes a number and an array of answer objects
 class Question {
-    constructor(number, answers) {
+    constructor(number, question, answers) {
         this.number = number;
+        this.question = question;
         this.answers = answers;
     }
 };
 
 //Each question will use the above class
-const questionOne = new Question('One', [{text: 'one', correct: 'false'}, 
+const questionOne = new Question('One', 'Which of these is a syntactically-sound function expression in JavaScript?', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'true'}]);
 
-const questionTwo = new Question('Two', [{text: 'one', correct: 'false'}, 
+const questionTwo = new Question('Two', '', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'true'}, 
 {text: 'correct', correct: 'false'}]);
 
-const questionThree = new Question('Three', [{text: 'one', correct: 'false'}, 
+const questionThree = new Question('Three', '', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'true'}, 
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'false'}]);
 
-const questionFour = new Question('Four', [{text: 'one', correct: 'false'}, 
+const questionFour = new Question('Four', '', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'true'}]);
 
-const questionFive = new Question('Five', [{text: 'one', correct: 'true'}, 
+const questionFive = new Question('Five', '', [{text: 'one', correct: 'true'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'false'}]);
 
-const questionSix = new Question('Six', [{text: 'one', correct: 'false'}, 
+const questionSix = new Question('Six', '', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'true'}, 
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'false'}]);
 
-const questionSeven = new Question('Seven', [{text: 'one', correct: 'false'}, 
+const questionSeven = new Question('Seven', '', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'true'}]);
 
-const questionEight = new Question('Eight', [{text: 'one', correct: 'false'}, 
+const questionEight = new Question('Eight', '', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'true'}]);
 
-const questionNine = new Question('Nine', [{text: 'one', correct: 'false'}, 
+const questionNine = new Question('Nine', '', [{text: 'one', correct: 'false'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'true'}, 
 {text: 'correct', correct: 'false'}]);
 
-const questionTen = new Question('Ten', [{text: 'one', correct: 'true'}, 
+const questionTen = new Question('Ten', '', [{text: 'one', correct: 'true'}, 
 {text: 'two', correct: 'false'}, 
 {text: 'three', correct: 'false'}, 
 {text: 'correct', correct: 'false'}]);
@@ -93,6 +95,9 @@ const renderStartButton = () => {
 
     //Set welcome text
     questionNumber.textContent = 'Welcome to the Coding Quiz!';
+
+    //Delete question text
+    questionContent.textContent = '';
 
     //Create and append quiz info
     let infoDiv = document.createElement('li');
@@ -180,6 +185,7 @@ const renderQuestions = questionObject => {
 
     //Update question number
     questionNumber.textContent = `Question ${questionObject.number}:`;
+    questionContent.textContent = `${questionObject.question}`;
 
     //Loop through the answer array
     questionObject.answers.forEach(answer => {
@@ -229,7 +235,12 @@ const renderScore = () => {
 
     //Set score screen text
     questionNumber.textContent = 'Time\'s up! Submit your score below.'
+
+    //Delete question text
+    questionContent.textContent = '';
+
     quizList.innerHTML = '';
+    
     resultDiv.textContent = 'Enter your name above and submit your score.';
 
     quizList.innerHTML = "<form><label for='name'>Name:</label><input id='name' type='text' name='name'/><input id='submit' type='submit' name='submit' value='Submit'/></form>"
