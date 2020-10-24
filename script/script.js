@@ -290,6 +290,28 @@ const getTopFiveScores = () => {
     return topFiveScores;
 }; 
 
+//Function for rendering the top five scores
+const renderHighScores = () => {
+    const topFive = getTopFiveScores();
+
+    quizList.innerHTML = '';
+
+    questionNumber.textContent = 'The Top Five:';
+
+    resultDiv.textContent = 'Check out these top scorers!';
+
+    topFive.forEach(score => {
+        let newScoreItem = document.createElement('li');
+        quizList.append(newScoreItem);
+
+        let newScoreButton = document.createElement('button');
+        newScoreButton.textContent = `${topFive.indexOf(score) + 1}. ${score[0]}: ${score[1]} points`;
+        newScoreButton.setAttribute('class', 'answer');
+        newScoreButton.setAttribute('disabled', '');
+        newScoreItem.append(newScoreButton);
+    });
+};
+
 //Initial render
 renderStartButton();
 
@@ -297,7 +319,7 @@ renderStartButton();
 highScores.addEventListener('click', () => {
     if (highScores.getAttribute('data-function') === 'score-list') {
         highScores.textContent = 'Return';
-        highScores.setAttribute('data-funtion', 'return');
+        highScores.setAttribute('data-function', 'return');
         renderHighScores();
     } else {
         highScores.textContent = 'View highscores';
