@@ -20,55 +20,55 @@ class Question {
 };
 
 //Each question will use the above class
-const questionOne = new Question('One', 'Which of these is a syntactically-sound function expression in JavaScript?', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'true'}]);
+const questionOne = new Question('One', 'Which of these is a syntactically-sound function expression in JavaScript?', [{text: 'const exampleFunc = () {};', correct: 'false'}, 
+{text: 'function exampleFunc = () {};', correct: 'false'}, 
+{text: 'function exampleFunc () {};', correct: 'false'}, 
+{text: 'const exampleFunc = function() {};', correct: 'true'}]);
 
-const questionTwo = new Question('Two', '', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'true'}, 
-{text: 'correct', correct: 'false'}]);
+const questionTwo = new Question('Two', 'jQuery is an example of a/an _____.', [{text: 'Web API', correct: 'false'}, 
+{text: 'Algorithm', correct: 'false'}, 
+{text: 'Library', correct: 'true'}, 
+{text: 'Class', correct: 'false'}]);
 
-const questionThree = new Question('Three', '', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'true'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'false'}]);
+const questionThree = new Question('Three', 'What is the correct syntax for referencing an object\'s property within one of its methods?', [{text: 'exampleProperty', correct: 'false'}, 
+{text: 'this.exampleProperty', correct: 'true'}, 
+{text: 'Object.exampleProperty', correct: 'false'}, 
+{text: 'Object[exampleProperty]', correct: 'false'}]);
 
-const questionFour = new Question('Four', '', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'true'}]);
+const questionFour = new Question('Four', 'How would one describe a function that calls itself?', [{text: 'Repetitive', correct: 'false'}, 
+{text: 'Callback', correct: 'false'}, 
+{text: 'Anonymous', correct: 'false'}, 
+{text: 'Recursive', correct: 'true'}]);
 
-const questionFive = new Question('Five', '', [{text: 'one', correct: 'true'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'false'}]);
+const questionFive = new Question('Five', 'If I needed to access "pizza" within the object below, how would I do so?: <br/> const foods = {snacks: ["popcorn", "candy", "pretzels"], <br/> dinner: ["pizza", "broccoli", "spaghetti"]}', [{text: 'foods.dinner[0]', correct: 'true'}, 
+{text: 'foods.pizza', correct: 'false'}, 
+{text: 'foods.dinner.pizza', correct: 'false'}, 
+{text: 'foods.dinner[1]', correct: 'false'}]);
 
-const questionSix = new Question('Six', '', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'true'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'false'}]);
+const questionSix = new Question('Six', 'Which of these is the correct way to export a function named "modularFunc"?', [{text: 'export function modularFunc() {};', correct: 'false'}, 
+{text: 'All of these are correct.', correct: 'true'}, 
+{text: 'export { modularFunc };', correct: 'false'}, 
+{text: 'export default function modularFunc() {};', correct: 'false'}]);
 
-const questionSeven = new Question('Seven', '', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'true'}]);
+const questionSeven = new Question('Seven', 'What would happen if you were to attempt to merge branches with conflicting edits in Git?', [{text: 'Nothing would happen. The main branch would have precedence.', correct: 'false'}, 
+{text: 'The conflicting edits would corrupt the file(s).', correct: 'false'}, 
+{text: 'The conflicting edits would appear one after the other within the merged version of the file(s).', correct: 'false'}, 
+{text: 'A merge conflict would occur, and you would need to resolve this conlict before merging.', correct: 'true'}]);
 
-const questionEight = new Question('Eight', '', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'true'}]);
+const questionEight = new Question('Eight', 'Which of the HTML tags below are "self-closing"?', [{text: 'p', correct: 'false'}, 
+{text: 'script', correct: 'false'}, 
+{text: 'aside', correct: 'false'}, 
+{text: 'link', correct: 'true'}]);
 
-const questionNine = new Question('Nine', '', [{text: 'one', correct: 'false'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'true'}, 
-{text: 'correct', correct: 'false'}]);
+const questionNine = new Question('Nine', 'How would one center flex-items along the main axis in CSS?', [{text: 'align-items: center;', correct: 'false'}, 
+{text: 'align-content: center;', correct: 'false'}, 
+{text: 'justify-content: center;', correct: 'true'}, 
+{text: 'justify-items: center;', correct: 'false'}]);
 
-const questionTen = new Question('Ten', '', [{text: 'one', correct: 'true'}, 
-{text: 'two', correct: 'false'}, 
-{text: 'three', correct: 'false'}, 
-{text: 'correct', correct: 'false'}]);
+const questionTen = new Question('Ten', 'How would one move out of a directory within the terminal?', [{text: 'cd ..', correct: 'true'}, 
+{text: 'cd back', correct: 'false'}, 
+{text: 'cd .', correct: 'false'}, 
+{text: 'cd mkdir', correct: 'false'}]);
 //End of questions
 
 //As the questions are rendered the questionCount will increment
@@ -101,7 +101,7 @@ const renderStartButton = () => {
 
     //Create and append quiz info
     let infoDiv = document.createElement('li');
-    infoDiv.innerHTML = '<p class="info">Welcome to the coding quiz. The format of the quiz is multiple-choice and you will have one minute to complete the quiz. For every wrong answer we will subtract five seconds from the timer at the top-right corner of the screen. After you have selected the correct answer, the "next" button will appear below the answers. Feel free to log your score at the end of the quiz. Good luck!</p>';
+    infoDiv.innerHTML = '<p class="info">Welcome to the coding quiz. The format of the quiz is multiple-choice and you will have one minute to complete the quiz. For every wrong answer we will subtract ten seconds from the timer at the top-right corner of the screen. After you have selected the correct answer, the "next" button will appear below the answers. Feel free to log your score at the end of the quiz. Good luck!</p>';
     quizList.append(infoDiv);
 
     //Create and append lit item for start button
@@ -185,7 +185,7 @@ const renderQuestions = questionObject => {
 
     //Update question number
     questionNumber.textContent = `Question ${questionObject.number}:`;
-    questionContent.textContent = `${questionObject.question}`;
+    questionContent.innerHTML = `${questionObject.question}`;
 
     //Loop through the answer array
     questionObject.answers.forEach(answer => {
@@ -215,7 +215,7 @@ const renderQuestions = questionObject => {
                 event.currentTarget.setAttribute('class', 'answer red');
                 event.currentTarget.setAttribute('disabled', '');
                 //Subtract five seconds from timer
-                count -= 5;
+                count -= 10;
                 timer.textContent = count;
 
                 resultDiv.textContent = 'Nope.';
